@@ -55,6 +55,23 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
   },
+  // numberInput: {
+  //   height: 50,
+  //   width: 50,
+  //   fontSize: 32,
+  //   borderBottomColor: '#ddb52f',
+  //   borderBottomWidth: 2,
+  //   color: '#ddb52f',
+  //   marginVertical: 8,
+  //   fontWeight: 'bold',
+  //   textAlign: 'center',
+  // },
+  // buttonsContainer: {
+  //   flexDirection: 'row',
+  // },
+  // buttonContainer: {
+  //   flex: 1,
+  // },
 });
 
 export default StartGame;
