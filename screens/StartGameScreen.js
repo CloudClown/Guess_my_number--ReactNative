@@ -1,15 +1,33 @@
 import { useState } from 'react';
-import { TextInput, View, StyleSheet } from 'react-native';
+import { TextInput, View, StyleSheet, Alert } from 'react-native';
+
 import PrimaryButton from '../components/PrimaryButton';
 
-function StartGame() {
+function StartGameScreen({ onPickNumber }) {
   const [enteredNumber, setEnteredNumber] = useState('');
 
   function numberInputHandler(enteredText) {
     setEnteredNumber(enteredText);
   }
 
-  function confirmInputHandler() {}
+  function resetInputHandler() {
+    setEnteredNumber('');
+  }
+
+  function confirmInputHandler() {
+    const chosenNumber = parseInt(enteredNumber);
+
+    if (isNaN(chosenNumber) || chosenNumber <= 0 || chosenNumber > 99) {
+      Alert.alert(
+        'Invalid number!',
+        'Number has to be a number between 1 and 99.',
+        [{ text: 'Okay', style: 'destructive', onPress: resetInputHandler }]
+      );
+      return;
+    }
+
+    onPickNumber(chosenNumber);
+  }
 
   return (
     <View style={styles.inputContainer}>
@@ -24,7 +42,7 @@ function StartGame() {
       />
       <View style={styles.buttonsContainer}>
         <View style={styles.buttonContainer}>
-          <PrimaryButton>Reset</PrimaryButton>
+          <PrimaryButton onPress={resetInputHandler}>Reset</PrimaryButton>
         </View>
         <View style={styles.buttonContainer}>
           <PrimaryButton onPress={confirmInputHandler}>Confirm</PrimaryButton>
@@ -34,15 +52,17 @@ function StartGame() {
   );
 }
 
+export default StartGameScreen;
+
 const styles = StyleSheet.create({
   inputContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 100,
     marginHorizontal: 24,
-    borderRadius: 8,
     padding: 16,
     backgroundColor: '#3b021f',
+    borderRadius: 8,
     elevation: 4,
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 2 },
@@ -67,5 +87,3 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-export default StartGame;
